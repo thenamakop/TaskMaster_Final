@@ -1,0 +1,175 @@
+{
+  "user": {
+    "id": "user1",
+    "name": "Alex Johnson",
+    "email": "alex@example.com",
+    "avatar": "AJ",
+    "role": "Product Manager"
+  },
+  "notifications": [
+    {
+      "id": "notif1",
+      "sender": {
+        "name": "Sarah Chen",
+        "avatar": "SC"
+      },
+      "action": "mentioned you in",
+      "message": "Can you review the latest design changes?",
+      "project": "Design System",
+      "time": "2 hours ago",
+      "isRead": false,
+      "type": "mention"
+    },
+    {
+      "id": "notif2",
+      "sender": {
+        "name": "Mike Roberts",
+        "avatar": "MR"
+      },
+      "action": "assigned you to",
+      "message": "Please prioritize the Q3 roadmap items",
+      "project": "Product Planning",
+      "time": "Yesterday",
+      "isRead": false,
+      "type": "assigned"
+    },
+    {
+      "id": "notif3",
+      "sender": {
+        "name": "Jamie Lee",
+        "avatar": "JL"
+      },
+      "action": "commented on",
+      "message": "The analytics dashboard looks great!",
+      "project": "Analytics",
+      "time": "2 days ago",
+      "isRead": true,
+      "type": "comment"
+    },
+    {
+      "id": "notif4",
+      "sender": {
+        "name": "Taylor Kim",
+        "avatar": "TK"
+      },
+      "action": "mentioned you in",
+      "message": "When can we schedule the user testing session?",
+      "project": "User Research",
+      "time": "3 days ago",
+      "isRead": true,
+      "type": "mention"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj1",
+      "name": "Design System",
+      "description": "Unified design system for all products",
+      "status": "In Progress",
+      "completion": 65,
+      "members": ["user1", "user2", "user3"]
+    },
+    {
+      "id": "proj2",
+      "name": "Mobile App Redesign",
+      "description": "Redesign of the mobile application",
+      "status": "Planning",
+      "completion": 20,
+      "members": ["user1", "user4"]
+    },
+    {
+      "id": "proj3",
+      "name": "Analytics Dashboard",
+      "description": "New analytics dashboard with improved metrics",
+      "status": "Completed",
+      "completion": 100,
+      "members": ["user3", "user5"] 
+    }
+  ],
+  "roadmap": {
+    "Q1": {
+      "completion": 100,
+      "initiatives": [
+        {
+          "id": "init1",
+          "title": "User Research",
+          "description": "Conduct user interviews and surveys",
+          "status": "completed",
+          "owner": "Jamie Lee"
+        },
+        {
+          "id": "init2",
+          "title": "Design System Foundation",
+          "description": "Create core design tokens and components",
+          "status": "completed",
+          "owner": "Sarah Chen"
+        }
+      ]
+    },
+    "Q2": {
+      "completion": 75,
+      "initiatives": [
+        {
+          "id": "init3",
+          "title": "Mobile App Redesign",
+          "description": "Redesign the mobile application",
+          "status": "in-progress",
+          "owner": "Mike Roberts"
+        },
+        {
+          "id": "init4",
+          "title": "Analytics Dashboard",
+          "description": "Build new analytics dashboard",
+          "status": "completed",
+          "owner": "Taylor Kim"
+        }
+      ]
+    },
+    "Q3": {
+      "completion": 30,
+      "initiatives": [
+        {
+          "id": "init5",
+          "title": "API Improvements",
+          "description": "Enhance API performance and documentation",
+          "status": "in-progress",
+          "owner": "Alex Johnson"
+        },
+        {
+          "id": "init6",
+          "title": "Onboarding Flow",
+          "description": "Redesign user onboarding experience",
+          "status": "planning",
+          "owner": "Sarah Chen"
+        }
+      ]
+    },
+    "Q4": {
+      "completion": 0,
+      "initiatives": [
+        {
+          "id": "init7",
+          "title": "Reporting Tools",
+          "description": "Build advanced reporting capabilities",
+          "status": "planning",
+          "owner": "Taylor Kim"
+        },
+        {
+          "id": "init8",
+          "title": "Integration Platform",
+          "description": "Create platform for third-party integrations",
+          "status": "planning",
+          "owner": "Mike Roberts"
+        }
+      ]
+    }
+  }
+  ,
+  "tasks": [
+    { "id": "t1", "title": "Build authentication UI", "status": "backlog", "priority": "Medium", "assignee": "Priya" },
+    { "id": "t2", "title": "Fix login redirect after SSO", "status": "in-progress", "priority": "High", "assignee": "Maulik" },
+    { "id": "t3", "title": "Analytics ETL job", "status": "in-progress", "priority": "Medium", "assignee": "Alex" },
+    { "id": "t4", "title": "SSO onboarding flow QA", "status": "review", "priority": "High", "assignee": "Maulik" },
+    { "id": "t5", "title": "Marketing site SEO pass", "status": "done", "priority": "Low", "assignee": "Daxon" }
+  ]
+}

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Analytics</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+            <path d="M7 8h10M7 12h10M7 16h6" stroke-width="2" stroke="currentColor" fill="none"></path>
+          </svg>
+        </div>
+        <div class="workspace">
+          <span class="workspace-name">TaskMaster</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="index.html">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span class="label">Home</span>
+        </a>
+        <a class="nav-link" href="inbox.html">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 4H3a2 2 0 0 0-2 2v1l11 6 11-6V6a2 2 0 0 0-2-2zm0 6-9.5 5.18a1 1 0 0 1-1 0L1 10v8a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2v-8z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span class="label">Inbox</span>
+        </a>
+        <a class="nav-link" href="tasks.html">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 3H5a2 2 0 0 0-2 2v14l4-4h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span class="label">My Tasks</span>
+        </a>
+        <a class="nav-link active" href="analytics.html">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 19h4V9H4v10zm6 0h4V5h-4v14zm6 0h4V13h-4v6z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span class="label">Analytics</span>
+        </a>
+        
+      </nav>
+
+
+      
+
+      <div class="sidebar-profile">
+          <div class="avatar">MG</div>
+          <div class="profile-info">
+            <div class="profile-name">Maulik Gupta</div>
+            <div class="profile-email">maulikgupta21@gmail.com</div>
+        </div>
+        <button class="icon-button" aria-label="Settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div class="search">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16a6.471 6.471 0 0 0 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <input type="search" placeholder="Search…" aria-label="Search analytics" />
+        </div>
+
+        <div class="topbar-actions">
+          <button class="button" aria-label="Date range">
+            <svg viewBox="0 0 24 24" width="16" height="16" style="margin-right:6px">
+              <rect x="4" y="5" width="16" height="15" rx="2" fill="currentColor" opacity="0.2"></rect>
+              <rect x="6" y="9" width="12" height="9" fill="currentColor"></rect>
+            </svg>
+            Last 30 days
+          </button>
+
+          <a href="#" class="button button-primary">Export</a>
+
+          <label class="theme-toggle" title="Toggle dark mode">
+            <input type="checkbox" id="theme-toggle" />
+            <span class="toggle-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.8 1.8-1.8zM1 13h3v-2H1v2zm10 10h2v-3h-2v3zm7.03-18.16l1.8-1.79 1.79 1.79-1.8 1.8-1.79-1.8zM20 13h3v-2h-3v2zM17.24 19.16l1.8 1.79 1.79-1.79-1.8-1.8-1.79 1.8zM4.84 17.24l-1.79 1.8 1.79 1.79 1.8-1.8-1.8-1.79z" fill="currentColor"></path>
+                <path d="M12 4a8 8 0 1 0 8 8c0-.34-.02-.67-.06-1a6 6 0 1 1-6-7c.33-.04.66-.06 1-.06z" fill="currentColor"></path>
+              </svg>
+            </span>
+            <span class="toggle-label">Dark</span>
+          </label>
+        </div>
+      </header>
+
+      <main class="content">
+        <header class="page-header">
+          <div class="page-title">
+            <h1>Analytics</h1>
+            <p class="muted">Track your team’s performance and progress</p>
+          </div>
+        </header>
+
+        <!-- KPI cards -->
+        <section class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="5" y="6" width="14" height="2" fill="currentColor"></rect>
+                <rect x="5" y="11" width="14" height="2" fill="currentColor"></rect>
+                <rect x="5" y="16" width="14" height="2" fill="currentColor"></rect>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">248</div>
+              <div class="stat-label">Total Tasks</div>
+              <div class="stat-trend up">+12% ↑</div>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="6" fill="currentColor"></circle>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">156</div>
+              <div class="stat-label">Completed Tasks</div>
+              <div class="stat-trend up">+8% ↑</div>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                <path d="M12 8v5l3 2" stroke="currentColor" stroke-width="2" fill="none"></path>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">4.2 days</div>
+              <div class="stat-label">Avg. Completion Time</div>
+              <div class="stat-trend down">+0.5 days ↑</div>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M7 7h10v10H7z" fill="currentColor"></path>
+                <circle cx="9" cy="9" r="1" fill="#fff"></circle>
+                <circle cx="15" cy="9" r="1" fill="#fff"></circle>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">12</div>
+              <div class="stat-label">Active Members</div>
+              <div class="stat-trend">0% —</div>
+            </div>
+          </article>
+        </section>
+
+        <!-- Widgets -->
+        <section class="widgets-grid analytics-grid">
+          <!-- Bars chart -->
+          <article class="widget">
+            <div class="widget-header">
+              <h3>Tasks Over Time</h3>
+              <div class="legend small">
+                <span class="dot created"></span><span>Created</span>
+                <span class="dot completed"></span><span>Completed</span>
+              </div>
+            </div>
+            <div class="chart bars analytics-bars">
+              <div class="bars-grid">
+                <div class="bar-pair">
+                  <div class="bar created" style="height: 70%"></div>
+                  <div class="bar completed" style="height: 60%"></div>
+                </div>
+                <div class="bar-pair">
+                  <div class="bar created" style="height: 55%"></div>
+                  <div class="bar completed" style="height: 65%"></div>
+                </div>
+                <div class="bar-pair">
+                  <div class="bar created" style="height: 80%"></div>
+                  <div class="bar completed" style="height: 75%"></div>
+                </div>
+                <div class="bar-pair">
+                  <div class="bar created" style="height: 50%"></div>
+                  <div class="bar completed" style="height: 45%"></div>
+                </div>
+                <div class="bar-pair">
+                  <div class="bar created" style="height: 60%"></div>
+                  <div class="bar completed" style="height: 55%"></div>
+                </div>
+                <div class="bar-pair">
+                  <div class="bar created" style="height: 40%"></div>
+                  <div class="bar completed" style="height: 35%"></div>
+                </div>
+              </div>
+              <div class="bars-labels">
+                <span>Week 1</span>
+                <span>Week 2</span>
+                <span>Week 3</span>
+                <span>Week 4</span>
+                <span>Week 5</span>
+                <span>Week 6</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Donut chart -->
+          <article class="widget">
+            <div class="widget-header">
+              <h3>Task Distribution</h3>
+              <div class="segmented">
+                <button class="segment active">By Status</button>
+                <button class="segment">By Priority</button>
+                <button class="segment">By Assignee</button>
+              </div>
+            </div>
+
+            <div class="donut-wrap">
+              <div class="donut" aria-label="Task distribution">
+                <div class="donut-center">248</div>
+              </div>
+              <ul class="legend-list">
+                <li><span class="dot todo"></span> To Do <span class="legend-value">74 (30%)</span></li>
+                <li><span class="dot inprogress"></span> In Progress <span class="legend-value">112 (45%)</span></li>
+                <li><span class="dot done"></span> Done <span class="legend-value">62 (25%)</span></li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Performance table spans full width -->
+          <article class="widget span-2">
+            <div class="widget-header">
+              <h3>Project Performance</h3>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Project</th>
+                  <th>Tasks</th>
+                  <th>Completed</th>
+                  <th>Avg. Time</th>
+                  <th>Progress</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="table-project">
+                      <span class="chip-round">AS</span>
+                      <span>Authentication Service</span>
+                    </div>
+                  </td>
+                  <td>64</td>
+                  <td>48</td>
+                  <td>3.2 days</td>
+                  <td>
+                    <div class="progress">
+                      <div class="progress-bar"><span style="width:75%"></span></div>
+                      <span class="progress-label">75%</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="table-project">
+                      <span class="chip-round">UI</span>
+                      <span>User Interface</span>
+                    </div>
+                  </td>
+                  <td>92</td>
+                  <td>56</td>
+                  <td>4.8 days</td>
+                  <td>
+                    <div class="progress">
+                      <div class="progress-bar"><span style="width:60%"></span></div>
+                      <span class="progress-label">60%</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="table-project">
+                      <span class="chip-round">DS</span>
+                      <span>Data Storage</span>
+                    </div>
+                  </td>
+                  <td>40</td>
+                  <td>28</td>
+                  <td>3.9 days</td>
+                  <td>
+                    <div class="progress">
+                      <div class="progress-bar"><span style="width:50%"></span></div>
+                      <span class="progress-label">50%</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

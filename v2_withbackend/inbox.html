@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inbox - TaskMaster</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="js/app.js"></script>
+  <script src="js/inbox.js"></script>
+  <style>
+    /* Inbox-specific styles */
+    .inbox-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    .inbox-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .inbox-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+    }
+    
+    .inbox-tabs {
+      display: flex;
+      gap: 0;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+    
+    .inbox-tab {
+      padding: 10px 20px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    
+    .inbox-tab.active {
+      color: var(--text);
+      background: var(--accent-100);
+      font-weight: 600;
+    }
+    
+    .inbox-tab:hover:not(.active) {
+      color: var(--text);
+      background: var(--accent-100);
+    }
+    
+    .notifications-list {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .notification-item {
+      display: flex;
+      align-items: flex-start;
+      gap:16px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    
+    .notification-item:last-child {
+      border-bottom: none;
+    }
+    
+    .notification-item:hover {
+      background: var(--accent-100);
+      transform: translateY(-1px);
+    }
+    
+    .notification-item.unread {
+      background: linear-gradient(90deg, var(--accent-100) 0%, transparent 100%);
+      border-left: 4px solid var(--accent);
+    }
+    
+    .notification-item.unread::before {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 24px;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px var(--panel);
+    }
+    
+    .notification-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    }
+    
+    .notification-content {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .notification-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .notification-sender {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 15px;
+    }
+    
+    .notification-action {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    
+    .notification-badge {
+      background: var(--accent);
+      color: white;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .notification-message {
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      background: var(--bg);
+      padding: 12px 16px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+    
+    .notification-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .notification-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .notification-time {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .notification-project {
+      color: var(--accent);
+      font-size: 12px;
+      background: var(--accent-100);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    
+    .notification-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    
+    .notification-actions button {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .notification-actions button:hover {
+      color: var(--accent);
+      background: var(--accent-100);
+      transform: scale(1.1);
+    }
+    
+    .mark-all-read {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      background: var(--accent-100);
+    }
+    
+    .mark-all-read:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 64px 24px;
+      color: var(--muted);
+    }
+    
+    .empty-state svg {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 24px;
+      opacity: 0.6;
+      color: var(--accent);
+    }
+    
+    .empty-state h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    
+    .empty-state p {
+      font-size: 14px;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+            <path d="M7 8h10M7 12h10M7 16h6" stroke-width="2" stroke="currentColor" fill="none"></path>
+          </svg>
+        </div>
+        <div class="workspace">
+          <span class="workspace-name">TaskMaster</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="index.html">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span class="label">Home</span>
+        </a>
+        <a class="nav-link active" href="inbox.html">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 4H3a2 2 0 0 0-2 2v1l11 6 11-6V6a2 2 0 0 0-2-2zm0 6-9.5 5.18a1 1 0 0 1-1 0L1 10v8a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2v-8z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span class="label">Inbox</span>
+        </a>
+        <a class="nav-link" href="tasks.html">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 3H5a2 2 0 0 0-2 2v14l4-4h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span class="label">My Tasks</span>
+        </a>
+        <a class="nav-link" href="analytics.html">
+          <span class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 19h4V9H4v10zm6 0h4V5h-4v14zm6 0h4V13h-4v6z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <span class="label">Analytics</span>
+        </a>
+      </nav>
+
+      
+
+      
+
+      <div class="sidebar-profile">
+        <div class="avatar" aria-hidden="true">MG</div>
+        <div class="profile-info">
+          <div class="profile-name">Maulik Gupta</div>
+          <div class="profile-email">maulikgupta21@gmail.com</div>
+        </div>
+        <button class="icon-button" aria-label="Settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div class="search">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16a6.471 6.471 0 0 0 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"></path>
+            </svg>
+          </span>
+          <input type="search" placeholder="Search..." aria-label="Search" />
+        </div>
+
+        <div class="topbar-actions">
+          <label class="theme-toggle" title="Toggle dark mode">
+            <input type="checkbox" id="theme-toggle" />
+            <span class="toggle-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.8 1.8-1.8zM1 13h3v-2H1v2zm10 10h2v-3h-2v3zm7.03-18.16l1.8-1.79 1.79 1.79-1.8 1.8-1.79-1.8zM20 13h3v-2h-3v2zM17.24 19.16l1.8 1.79 1.79-1.79-1.8-1.8-1.79 1.8zM4.84 17.24l-1.79 1.8 1.79 1.79 1.8-1.8-1.8-1.79z" fill="currentColor"></path>
+                <path d="M12 4a8 8 0 1 0 8 8c0-.34-.02-.67-.06-1a6 6 0 1 1-6-7c.33-.04.66-.06 1-.06z" fill="currentColor"></path>
+              </svg>
+            </span>
+            <span class="toggle-label">Dark</span>
+          </label>
+
+          <button class="icon-button" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2zm6-6V11a6 6 0 0 0-5-5.91V4a1 1 0 1 0-2 0v1.09A6 6 0 0 0 6 11v5l-2 2v1h16v-1l-2-2z" fill="currentColor"></path>
+            </svg>
+          </button>
+
+          <a href="#" class="button button-primary">+ New Task</a>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="inbox-container">
+          <div class="inbox-header">
+            <h1>Inbox</h1>
+            <a href="#" class="mark-all-read">Mark all as read</a>
+          </div>
+          
+          <div class="inbox-tabs">
+            <button class="inbox-tab active">All</button>
+            <button class="inbox-tab">Unread</button>
+            <button class="inbox-tab">Mentions</button>
+            <button class="inbox-tab">Assigned</button>
+          </div>
+          
+          <div class="notifications-list">
+            <div class="notification-item unread">
+              <div class="notification-avatar">JD</div>
+              <div class="notification-content">
+                <div class="notification-header">
+                  <span class="notification-sender">John Doe</span>
+                  <span class="notification-action">Mentioned you in a comment</span>
+                  <span class="notification-badge">Mention</span>
+                </div>
+                <div class="notification-message">
+                  @Mauli Shah can you review the latest changes to the authentication service?
+                </div>
+                <div class="notification-meta">
+                  <div class="notification-info">
+                    <span class="notification-time">10:30 AM</span>
+                    <span class="notification-project">Authentication Service</span>
+                  </div>
+                  <div class="notification-actions">
+                    <button title="Mark as read">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                      </svg>
+                    </button>
+                    <button title="Delete">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3,6 5,6 21,6"></polyline>
+                        <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="notification-item">
+              <div class="notification-avatar">JS</div>
+              <div class="notification-content">
+                <div class="notification-header">
+                  <span class="notification-sender">Jane Smith</span>
+                  <span class="notification-action">Assigned you to a task</span>
+                  <span class="notification-badge">Assigned</span>
+                </div>
+                <div class="notification-message">
+                  I've assigned you to the "Update user profile UI" task. Please take a look.
+                </div>
+                <div class="notification-meta">
+                  <div class="notification-info">
+                    <span class="notification-time">Yesterday</span>
+                    <span class="notification-project">User Interface</span>
+                  </div>
+                  <div class="notification-actions">
+                    <button title="Mark as read">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                      </svg>
+                    </button>
+                    <button title="Delete">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3,6 5,6 21,6"></polyline>
+                        <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="notification-item">
+              <div class="notification-avatar">TW</div>
+              <div class="notification-content">
+                <div class="notification-header">
+                  <span class="notification-sender">Tom Wilson</span>
+                  <span class="notification-action">Completed a task you created</span>
+                </div>
+                <div class="notification-message">
+                  I've completed the "Add documentation for API endpoints" task that you created.
+                </div>
+                <div class="notification-meta">
+                  <div class="notification-info">
+                    <span class="notification-time">2 days ago</span>
+                    <span class="notification-project">API Service</span>
+                  </div>
+                  <div class="notification-actions">
+                    <button title="Mark as read">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20,6 9,17 4,12"></polyline>
+                      </svg>
+                    </button>
+                    <button title="Delete">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3,6 5,6 21,6"></polyline>
+                        <path d="m19,6v14a2,2 0 0,1 -2,2H7a2,2 0 0,1 -2,-2V6m3,0V4a2,2 0 0,1 2,-2h4a2,2 0 0,1 2,2v2"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const app = document.querySelector('.app');
+
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    if (currentTheme === 'dark') {
+      app.classList.add('dark');
+      themeToggle.checked = true;
+    }
+
+    themeToggle.addEventListener('change', function() {
+      if (this.checked) {
+        app.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        app.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+    });
+
+    // Inbox tab functionality
+    const tabs = document.querySelectorAll('.inbox-tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        tabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Notification actions
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('button[aria-label="Mark as read"]')) {
+        const notificationItem = e.target.closest('.notification-item');
+        notificationItem.classList.remove('unread');
+      }
+      
+      if (e.target.closest('button[aria-label="Delete"]')) {
+        const notificationItem = e.target.closest('.notification-item');
+        notificationItem.style.opacity = '0.5';
+        setTimeout(() => {
+          notificationItem.remove();
+        }, 300);
+      }
+    });
+
+    // Mark all as read functionality
+    document.querySelector('.mark-all-read').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelectorAll('.notification-item.unread').forEach(item => {
+        item.classList.remove('unread');
+      });
+    });
+  </script>
+</body>
+</html>
